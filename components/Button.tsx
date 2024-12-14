@@ -1,39 +1,64 @@
 import { forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { StyleSheet, Text, Pressable, PressableProps, View } from 'react-native';
 
 type ButtonProps = {
   title?: string;
-} & TouchableOpacityProps;
+  isActive?: boolean;
+} & PressableProps;
 
-export const Button = forwardRef<View, ButtonProps>(({ title, ...touchableProps }, ref) => {
-  return (
-    <TouchableOpacity ref={ref} {...touchableProps} style={[styles.button, touchableProps.style]}>
-      <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
-  );
-});
+export const Button = forwardRef<View, ButtonProps>(
+  ({ title, isActive, disabled, ...pressableProps }, ref) => {
+    return (
+      <Pressable
+        ref={ref}
+        {...pressableProps}
+        style={[
+          styles.button,
+          isActive ? styles.activeButton : styles.inactiveButton,
+          disabled && styles.disabledButton,
+        ]}>
+        <Text
+          style={[
+            styles.buttonText,
+            !isActive && styles.buttonTextInactive,
+            disabled && styles.buttonTextDisabled,
+          ]}>
+          {title}
+        </Text>
+      </Pressable>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
-    backgroundColor: '#6366F1',
-    borderRadius: 24,
-    elevation: 5,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 24,
     padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      height: 2,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+  },
+  buttonTextInactive: { color: '#6366F1' },
+  buttonTextDisabled: { color: '#555' },
+  activeButton: {
+    backgroundColor: '#6366F1',
+  },
+  inactiveButton: {
+    backgroundColor: '#fff',
+    borderColor: '#6366F1',
+    borderWidth: 1,
+  },
+  disabledButton: {
+    opacity: 0.5,
+    backgroundColor: '#fff',
+    borderColor: '#555',
+    borderWidth: 1,
   },
 });

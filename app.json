@@ -3,7 +3,6 @@
     "name": "inglify",
     "slug": "inglify",
     "version": "1.0.0",
-
     "scheme": "inglify",
     "web": {
       "bundler": "metro",
@@ -17,19 +16,22 @@
         {
           "launchMode": "most-recent"
         }
-      ]
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ],
+      "expo-build-properties"
     ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -37,12 +39,22 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.caffeee.inglify",
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.caffeee.inglify"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f4752321-ce16-44c9-bdaf-a65489736530"
       }
     }
   }

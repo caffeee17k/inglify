@@ -1,19 +1,10 @@
-import { Stack, Link } from 'expo-router';
+import * as React from 'react';
 
-import { Button } from '~/components/Button';
-import { Container } from '~/components/Container';
-import { ScreenContent } from '~/components/ScreenContent';
+import { WordListComponent } from '~/components/WordListComponent';
+import words from '~/data/words_dictionary.json';
 
-export default function Home() {
-  return (
-    <>
-      <Stack.Screen options={{ title: 'Home' }} />
-      <Container>
-        <ScreenContent path="app/index.tsx" title="Home" />
-        <Link href={{ pathname: '/details', params: { name: 'Dan' } }} asChild>
-          <Button title="Show Details" />
-        </Link>
-      </Container>
-    </>
-  );
+export default function WordList() {
+  const wordList = React.useMemo(() => Object.keys(words), []);
+
+  return <WordListComponent wordList={wordList} />;
 }
