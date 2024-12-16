@@ -84,8 +84,11 @@ export default function LoginScreen() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Registrar" onPress={handleRegister} />
-      <Button title="Entrar" onPress={handleLogin} />
+
+      <View style={styles.buttonsContainer}>
+        <Button title="Registrar" onPress={handleRegister} />
+        <Button title="Entrar" onPress={handleLogin} />
+      </View>
     </View>
   );
 }
@@ -117,5 +120,8 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginBottom: 12,
+  },
+  buttonsContainer: {
+    gap: 16,
   },
 });
