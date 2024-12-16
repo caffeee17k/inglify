@@ -1,9 +1,10 @@
 import '~/utils/firebase';
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { router, Slot, usePathname } from 'expo-router';
 import * as React from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Pressable, Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -32,8 +33,15 @@ function NavigationBar() {
 }
 
 function AuthenticatedLayout() {
+  const { logout } = useAuth();
+
   return (
     <Container>
+      <Pressable onPress={logout} style={styles.exitButton}>
+        <Text style={styles.exitButtonText}>Sair</Text>
+        <MaterialIcons name="exit-to-app" size={40} color="#f16363" />
+      </Pressable>
+
       <NavigationBar />
       <View style={styles.containerContent}>
         <Slot />
@@ -100,5 +108,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  exitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    margin: 16,
+    gap: 8,
+  },
+  exitButtonText: {
+    fontSize: 24,
+    color: '#f16363',
   },
 });
