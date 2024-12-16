@@ -8,9 +8,7 @@
       "developmentClient": true,
       "distribution": "internal"
     },
-    "preview": {
-      "distribution": "internal"
-    },
+    "preview": { "channel": "preview", "distribution": "internal" },
     "production": {
       "autoIncrement": true
     }
